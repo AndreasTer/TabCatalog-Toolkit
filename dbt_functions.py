@@ -17,7 +17,7 @@ def get_account_id(token):
     #print(response.text)
     response_json = json.loads(response.text)
     account_id = response_json['data'][0]['id']
-    return(account_id)
+    return(str(account_id))
 
 #get jobs by account
 def get_jobs(account_id, token):
@@ -42,8 +42,7 @@ def get_jobs(account_id, token):
 def get_models_information(token, job_id):
 
     url = "https://metadata.cloud.getdbt.com/graphql"
-    job_id = '102781'
-    payload="{\"query\":\"{\\n  models(jobId: " + job_id + ") {\\n    uniqueId\\n    executionTime\\n    status\\n    executeCompletedAt\\n    database\\n    schema\\n\\n  }\\n}\",\"variables\":{}}"
+    payload="{\"query\":\"{\\n  models(jobId: " + job_id + ") {\\n    uniqueId\\n    executionTime\\n    status\\n    alias\\n    executeCompletedAt\\n    runElapsedTime\\n    database\\n    schema\\n\\n  }\\n}\",\"variables\":{}}"
     headers = {
       'Authorization': 'Token ' + token,
       'Content-Type': 'application/json'
@@ -52,7 +51,7 @@ def get_models_information(token, job_id):
     response = requests.request("POST", url, headers=headers, data=payload)
     response_json = json.loads(response.text)
     models_table = pd.json_normalize(response_json['data']['models'])
-    models_table = models_table[['uniqueId', 'executeCompletedAt', 'database']]
+    models_table = models_table[['uniqueId', 'executeCompletedAt', 'database', 'status', 'schema', 'runElapsedTime', 'alias']]
     return(models_table)
 
 def get_all_column_descriptions(token, job_id):

@@ -121,6 +121,20 @@ def add_comments_to_tab_table(tableau_columns, snow_columns):
     return(join_result)
 
 #---------------------------------------------------------------------
+#add data quality warning to asset
+def add_data_quality_warning(tab_url, site_id, table_id, message ,token):
+    #post description to tableau catalog
+    column_description_url = "https://"+tab_url+"/api/3.16/sites/"+site_id+"/dataQualityWarnings/table/" + table_id
+
+    payload = '<tsRequest>\n  <dataQualityWarning type="WARNING" isActive="true" message="' + message + '" isSevere="true" />\n</tsRequest>'
+    headers = {
+        'X-Tableau-Auth': token,
+      'Content-Type': 'text/plain'
+    }
+    response = requests.request("Post", column_description_url, headers=headers, data=payload).text
+    return
+
+#---------------------------------------------------------------------
 #function to publish 1 specific comment to a column in tableau
 def publish_description_to_column(tab_url, site_id, table_id,column_id, description_text,token):
     #post description to tableau catalog
