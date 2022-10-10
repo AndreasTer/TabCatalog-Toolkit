@@ -1,6 +1,6 @@
-# Tableau Catalog toolkit for dbt-cloud and 
+# Tableau Catalog toolkit
 
-This is an unoffical toolkit for getting column comments from dbt-cloud and various databases into the Tableau Catalog. It works for both datasource descriptions and data quality warnings in Tableau Catalog. Currently code for snowflake and oracle is included, but others could easily be added.
+This is an unoffical toolkit for getting metadata from **dbt-cloud** and **various databases** into **Tableau Catalog**. It works for both datasource descriptions and data quality warnings in Tableau Catalog. Currently code for snowflake and oracle is included, but others could easily be added.
 
 This code is combined from Madelines Lee's awesome [snowflake-tabcatalog](https://github.com/madelinefromtableau) and [dbt_to_tabcatalog](https://github.com/madelinefromtableau/dbt_to_tabcatalog) repositories. I not a developer, so the code is probably quite messy. Please use this toolkit only for demo or testing purposes.
 
